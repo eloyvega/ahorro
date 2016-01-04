@@ -1,5 +1,6 @@
-from django.db import models
 from django.conf import settings
+from django.db import models
+
 
 # Create your models here.
 class Semana(models.Model):
@@ -8,4 +9,4 @@ class Semana(models.Model):
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL)
 
     def __str__(self):
-        return str(self.cantidad)
+        return 'Semana %s de %s' % (self.numero, self.usuario)

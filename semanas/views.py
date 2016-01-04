@@ -49,14 +49,13 @@ class HomeView(LoginRequiredMixin, View):
         return render(request, 'semanas/home.html', {'semanas': semanas})
 
     def post(self, request):
-        semanas = Semana.objects.filter(usuario=request.user)
-        l = []
-        for semana in semanas:
-            l.append(semana.cantidad / 10)
-        cantidad = random.choice(list(set(range(1, 53)) - set(l)))
-        nuevo = Semana()
-        nuevo.numero = semanas.count() + 1
-        nuevo.cantidad = cantidad * 10
-        nuevo.usuario = request.user
-        nuevo.save()
+        cantidades = Semana.objects.values_list('cantidad', flat=True).filter(usuario=request.user)
+        if len(cantidades) < 52:
+            cantidades = [cantidad / 10 for cantidad in cantidades]
+            nueva_cantidad = random.choice([number for number in range(1, 53) if number not in cantidades])
+            semana = Semana()
+            semana.numero = len(cantidades) + 1
+            semana.cantidad = nueva_cantidad * 10
+            semana.usuario = request.user
+            semana.save()
         return HttpResponseRedirect(reverse('home'))
