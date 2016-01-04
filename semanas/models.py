@@ -7,6 +7,7 @@ class Semana(models.Model):
     numero = models.IntegerField()
     cantidad = models.IntegerField(blank=True, null=True)
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL)
+    fecha = models.DateField(blank=True, null=True)
 
     def __str__(self):
         return 'Semana %s de %s' % (self.numero, self.usuario)

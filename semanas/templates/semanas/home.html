@@ -3,18 +3,24 @@
 {% block content %}
     <h2>Hola {{ request.user.first_name }}</h2>
     <a href="{% url 'signout' %}">Cerrar sesión</a>
-    <h3>Tus semanas:</h3>
-    <ol>
-    {% for semana in semanas %}
-        <li>{{ semana.cantidad }}</li>
-    {% endfor %}
-    </ol>
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    <hr>
     <form action="{% url 'home' %}" method="post">
-
         {% csrf_token %}
-        {{ form.as_p }}
-
         <input type="submit" value="Generar"/>
     </form>
+
+    <h3>Tus semanas:</h3>
+    <table border="1" cellpadding="4">
+    <th>#</th>
+    <th>Cantidad</th>
+    <th>Fecha</th>
+    {% for semana in semanas %}
+    <tr>
+        <td>{{ semana.numero }}</td>
+        <td>{{ semana.cantidad }}</td>
+        <td>{{ semana.fecha }}</td>
+    </tr>
+    {% endfor %}
+    </table>
+
 {% endblock %}

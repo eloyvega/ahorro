@@ -1,4 +1,5 @@
 import random
+import datetime
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -57,5 +58,12 @@ class HomeView(LoginRequiredMixin, View):
             semana.numero = len(cantidades) + 1
             semana.cantidad = nueva_cantidad * 10
             semana.usuario = request.user
+            semana.fecha = self.get_fecha(semana.numero - 1)
             semana.save()
         return HttpResponseRedirect(reverse('home'))
+
+    @staticmethod
+    def get_fecha(numero):
+        fecha_base = datetime.date(2016,1,3)
+        return fecha_base + datetime.timedelta(7*numero)
+
