@@ -15,7 +15,11 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from semanas.views import HomeView, SigninView, SignoutView
 
 urlpatterns = [
+    url(r'^$', HomeView.as_view(), name='home'),
+    url(r'^signin/', SigninView.as_view(), name='signin'),
+    url(r'^signout/', SignoutView.as_view(), name='signout'),
     url(r'^admin/', admin.site.urls),
 ]
