@@ -16,6 +16,7 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib import admin
 from semanas.views import HomeView, SigninView, SignoutView
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 urlpatterns = [
     url(r'^$', HomeView.as_view(), name='home'),
@@ -23,3 +24,5 @@ urlpatterns = [
     url(r'^signout/', SignoutView.as_view(), name='signout'),
     url(r'^admin/', admin.site.urls),
 ]
+
+urlpatterns += staticfiles_urlpatterns()
