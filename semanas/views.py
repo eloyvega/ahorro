@@ -1,5 +1,5 @@
-import random
 import datetime
+import random
 
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.forms import AuthenticationForm
@@ -64,6 +64,5 @@ class HomeView(LoginRequiredMixin, View):
 
     @staticmethod
     def get_fecha(numero):
-        fecha_base = datetime.date(2016,1,3)
-        return fecha_base + datetime.timedelta(7*numero)
-
+        fecha_base = datetime.date(2016, 1, 3)
+        return fecha_base + datetime.timedelta(7 * numero)
