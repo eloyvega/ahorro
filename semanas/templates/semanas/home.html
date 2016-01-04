@@ -6,7 +6,7 @@
     <h3>Tus semanas:</h3>
     <ol>
     {% for semana in semanas %}
-        <li>{{ semana }}</li>
+        <li>{{ semana.cantidad }}</li>
     {% endfor %}
     </ol>
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
